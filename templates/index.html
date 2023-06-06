@@ -5,12 +5,12 @@
 </head>
 <body>
     <h1>Health Conditions Helpdesk</h1>
-    <form method="POST" action="/chatbot">
+    <form method="post" action="{{ url_for('chatbot') }}">
         <label for="condition">Health Condition:</label>
 
         <select name="condition" id="condition">
-            <option value="condition1">Condition 1</option>
-            <option value="condition2">Condition 2</option>
+            <option value="Cancer">Cancer</option>
+            <option value="Mental Disorder">Mental Disorder</option>
         </select>
  
         <br><br>

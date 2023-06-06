@@ -1,56 +1,43 @@
-# from flask import Flask, render_template, request
-
-
-# app = Flask(__name__, template_folder= "templates")
-# import openai
-
-
-# @app.route('/')
-# def home():
-#    return render_template('index.html')
-# if __name__ == '__main__':
-#    app.run()
-   
-# @app.route('/get_response', methods=['POST'])
-# def get_response():
-#     condition = request.form['condition']
-#     severity = request.form['severity']
-    
-#     # Add your logic to process the condition and severity and generate a response
-    
-#     # Example response based on condition and severity
-#     response = f"You selected {condition} with severity {severity}."
-    
-#     return response
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
 from flask import Flask, render_template, request
 import openai
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv()
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
-# print(openai.api_key)
+app = Flask(__name__, template_folder="templates")
 
 
-#SETUP FOR FLASK
-app = Flask(__name__, template_folder= "templates")
-
-
-#DEFINE THE HOME PAGE ROUTE
 @app.route('/')
 def home():
-   return render_template('index.html')
-if __name__ == '__main__':
-   app.run()
-   
+    return render_template('index.html')
 
-#DEFINE THE CHATBOT ROUTE
-@app.route("/chatbot",methods=["POST"])
+
+@app.route("/chatbot", methods=["POST"])
 def chatbot():
-    pass
+    condition = request.form["condition"]
+    severity = request.form["severity"]
+    
+    def generate_chatbot_response(condition, severity):
+        prompt = f"You have selected {condition} with severity {severity}."
+
+        response = openai.Completion.create(
+            engine='text-davinci-003',
+            prompt=prompt,
+            max_tokens=50,
+            temperature=0.7,
+            n=1,
+            stop=None
+        )
+
+        chatbot_response = response.choices[0].text.strip()
+        return chatbot_response
+
+    bot_response = generate_chatbot_response(condition, severity)
+
+    return render_template("chatbot.html", data1=condition,data2=severity, bot_response=bot_response)
+
+
+if __name__ == "__main__":
+    app.run(port=8000, debug=True)
