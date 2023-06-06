@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,21 +5,26 @@
 </head>
 <body>
     <h1>Health Conditions Helpdesk</h1>
-    <form method="POST" action="/get_response">
+    <form method="POST" action="/chatbot">
         <label for="condition">Health Condition:</label>
+
         <select name="condition" id="condition">
             <option value="condition1">Condition 1</option>
             <option value="condition2">Condition 2</option>
-            <!-- Add more condition options here -->
         </select>
+ 
         <br><br>
+
         <label for="severity">Severity:</label>
+
         <select name="severity" id="severity">
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
         </select>
+
         <br><br>
+
         <input type="submit" value="Submit">
     </form>
 </body>
