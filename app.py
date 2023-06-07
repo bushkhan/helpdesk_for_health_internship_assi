@@ -20,15 +20,17 @@ def chatbot():
     severity = request.form["severity"]
     
     def generate_chatbot_response(condition, severity):
-        prompt = f"You have selected {condition} with severity {severity}."
+        prompt = f"You selected:{condition} & severity:{severity}."
 
         response = openai.Completion.create(
             engine='text-davinci-003',
             prompt=prompt,
-            max_tokens=50,
+            max_tokens=256,
             temperature=0,
-            n=1,
-            stop=None
+            top_p=1,
+            stop=None,
+            frequency_penalty=0,
+            presence_penalty=5
         )
 
         chatbot_response = response.choices[0].text.strip()
