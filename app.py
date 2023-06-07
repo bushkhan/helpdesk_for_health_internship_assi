@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import openai
 import os
 from dotenv import load_dotenv
+import pyttsx3
 
 load_dotenv()
 
@@ -41,7 +42,7 @@ def chatbot():
         return chatbot_response
 
     bot_response = generate_chatbot_response(condition, severity)
-
+    
 
     #passing thenvalues to next page
     return render_template("chatbot.html", data1=condition,data2=severity, bot_response=bot_response)
