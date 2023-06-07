@@ -2,33 +2,60 @@
 <html>
 <head>
     <title>Health Conditions Helpdesk</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body{
+            padding-left: 100px
+
+        }
+        
+        div {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 900px
+          }
+    </style>
 </head>
+
 <body>
     <h1>Health Conditions Helpdesk</h1>
     <form method="post" action="{{ url_for('chatbot') }}">
-        <label for="condition">Health Condition:</label>
+        
+          <div class="form-group col-md-7">
+            <label for="condition">Health Condition:</label>
+            <select name="condition" id="condition" class="form-control">
+                <option value="Cancer">Cancer</option>
+                <option value="Diabetes">Diabetes</option>
+                <option value="Cholestrol">Cholestrol</option>
+                <option value="BP">BP</option>
+                <option value="Mental Disorder">Mental Disorder</option>
+            </select>
+          </div>
+        </div>
 
-        <select name="condition" id="condition">
-            <option value="Cancer">Cancer</option>
-            <option value="Diabetes">Diabetes</option>
-            <option value="Cholestrol">Cholestrol</option>
-            <option value="BP">BP</option>
-            <option value="Mental Disorder">Mental Disorder</option>
-        </select>
  
-        <br><br>
+          <div class="form-group col-md-7">
+            <label for="severity">Severity:</label>
 
-        <label for="severity">Severity:</label>
+            <select name="severity" id="severity" class="form-control">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+          </div>
 
-        <select name="severity" id="severity">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-        </select>
+          <div class="form-group row">
+            <div class="col-sm-10">
+                <input class="btn btn-primary" type="submit" value="Submit">
 
-        <br><br>
+            </div>
+          </div>
 
-        <input type="submit" value="Submit">
     </form>
+
+    
 </body>
 </html>
